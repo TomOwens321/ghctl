@@ -2,7 +2,8 @@ require 'solar_panel'
 require 'thermometer'
 
 Given(/^I have a solar panel$/) do
-  @panel = build :solar_panel
+  therm = build :thermometer
+  @panel = build( :solar_panel, :thermometer => therm )
 end
 
 When(/^a reservoir requests heat$/) do
