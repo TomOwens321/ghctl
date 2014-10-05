@@ -5,7 +5,7 @@ class Thermometer < Onewire::Scope
     attr_accessor :name, :location
 
 	def initialize( client, path )
-		@name = ""
+		@name = path
 		@location = ""
 		super
 	end
