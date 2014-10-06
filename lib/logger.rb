@@ -15,6 +15,17 @@ class Logger
 		@thermometers.delete_if { |t| t == device }
 	end
 
-	
+	def run
+		@running = Thread.new do
+			10.times do |t|
+				puts "Loop count #{t}"
+				sleep 2
+			end
+		end
+	end
+
+	def stop
+		@running.kill
+	end
 
 end
