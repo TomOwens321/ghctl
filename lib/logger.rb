@@ -17,9 +17,11 @@ class Logger
 
 	def run
 		@running = Thread.new do
-			10.times do |t|
-				puts "Loop count #{t}"
-				sleep 2
+			while @thermometers.size > 0 do
+				@thermometers.each do |t|
+					puts "#{t.name} : #{t.temperature}"
+				end
+				sleep 10
 			end
 		end
 	end
