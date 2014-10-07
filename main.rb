@@ -6,8 +6,7 @@ client = Onewire.client 'towens.com'
 path = client.dir[0]
 
 therm = Thermometer.new client, path
-
-puts therm.temperature
+therm.name = "South Window"
 
 logger = Logger.new
 logger.register therm
