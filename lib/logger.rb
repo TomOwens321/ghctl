@@ -19,7 +19,11 @@ class Logger
 		@running = Thread.new do
 			while @thermometers.size > 0 do
 				@thermometers.each do |t|
-					puts "#{t.name} : #{t.temperature}"
+					begin
+					  puts "%-24s : %3.4f" % [t.name,  t.temperature]
+					rescue
+					  puts "Error communicating with #{t.name}"
+					end
 				end
 				sleep 10
 			end

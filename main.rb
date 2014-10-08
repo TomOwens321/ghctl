@@ -3,14 +3,15 @@ require './lib/thermometer'
 require './lib/logger'
 
 client = Onewire.client 'towens.com'
-path = client.dir[0]
-
-therm = Thermometer.new client, path
-therm.name = "South Window"
-
 logger = Logger.new
-logger.register therm
+
+4.times do |l|
+	therm = Thermometer.new client, client.dir[l]
+	#therm.name = "Thermometer-#{l}"
+	logger.register therm
+end
+
 
 logger.run
 sleep 60
-logger.stop
+#logger.stop
