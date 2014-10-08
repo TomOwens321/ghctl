@@ -18,6 +18,7 @@ class Logger
 	def run
 		@running = Thread.new do
 			while @thermometers.size > 0 do
+				puts "--------------------------------------------"
 				@thermometers.each do |t| 
 					begin
 					  temp = t.temperature
