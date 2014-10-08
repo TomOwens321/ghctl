@@ -1,13 +1,16 @@
 require 'onewire'
 require './lib/thermometer'
 require './lib/logger'
+require './lib/owfuncs'
 
-client = Onewire.client 'towens.com'
+host = 'towens.com'
+client = Onewire.client host
 logger = Logger.new
+therms = OwFuncs.find_thermometers host
 
-4.times do |l|
-	therm = Thermometer.new client, client.dir[l]
-	therm.name = "Thermometer-#{l}"
+therms.each do |l|
+	therm = Thermometer.new client, l
+	therm.name = "Therm-#{l}"
 	logger.register therm
 end
 
