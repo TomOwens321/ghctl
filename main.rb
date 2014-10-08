@@ -13,5 +13,5 @@ end
 
 
 logger.run
-sleep 60
+sleep 600
 #logger.stop

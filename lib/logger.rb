@@ -21,7 +21,7 @@ class Logger
 				@thermometers.each do |t| 
 					begin
 					  temp = t.temperature
-					  puts "%-24s : %3.4f : %3.2f" % [t.name,  temp, temp * 9/5 + 32]
+					  puts "%-24s : %07.3f : %06.2f" % [t.name,  temp, temp * 9/5 + 32]
 					rescue
 					  puts "Error communicating with #{t.name}"
 					end
