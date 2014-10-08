@@ -18,9 +18,10 @@ class Logger
 	def run
 		@running = Thread.new do
 			while @thermometers.size > 0 do
-				@thermometers.each do |t|
+				@thermometers.each do |t| 
 					begin
-					  puts "%-24s : %3.4f" % [t.name,  t.temperature]
+					  temp = t.temperature
+					  puts "%-24s : %3.4f : %3.2f" % [t.name,  temp, temp * 9/5 + 32]
 					rescue
 					  puts "Error communicating with #{t.name}"
 					end
