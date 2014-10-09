@@ -1,3 +1,5 @@
+require './lib/logger'
+
 class ThermoMonitor
 
 	attr_reader :thermometers
@@ -17,7 +19,7 @@ class ThermoMonitor
 	end
 
 	def run
-		write_log_file_with_timestamp "-=< Temperature Logger Restart >=-"
+		Logger.write_log_file_with_timestamp "-=< Temperature Logger Restart >=-"
 		@running = Thread.new do
 			while @thermometers.size > 0 do
 				#puts "--------------------------------------------"
@@ -31,7 +33,7 @@ class ThermoMonitor
 					  end
 					rescue
 					  puts "Error communicating with #{t[:thermometer].name}"
-					  write_log_file_with_timestamp "!!! Error communicating with #{t[:thermometer].name}"
+					  Logger.write_log_file_with_timestamp "!!! Error communicating with #{t[:thermometer].name}"
 					end
 				end
 				sleep 10
@@ -40,21 +42,14 @@ class ThermoMonitor
 	end
 
 	def stop
-		write_log_file_with_timestamp "-=< Temperature Logger Shutdown >=-"
+		Logger.write_log_file_with_timestamp "-=< Temperature Logger Shutdown >=-"
 		@running.kill
 	end
 
 	def log_it(thermometer, temperature )
-		message = "#{thermometer[:thermometer].name} | %07.3f" % [temperature]
+		message = "TEMPLOG : #{thermometer[:thermometer].name} | %07.3f" % [temperature]
 		puts message
-		write_log_file_with_timestamp( message )
-	end
-
-	def write_log_file_with_timestamp( message )
-		Dir.mkdir("logs") unless Dir.exist?("logs")
-		msg = "#{Time.now.strftime('%Y-%m-%d %H:%M:%S')} | #{message}\n"
-		filename = "logs/#{Time.now.strftime('%Y-%m-%d')}-Temperatures.log"
-		File.open( filename, 'a' ) {|f| f.write(msg)}
+		Logger.write_log_file_with_timestamp( message )
 	end
 
 end
