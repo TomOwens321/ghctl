@@ -36,7 +36,7 @@ class ThermoMonitor
 					  Logger.write_log_file_with_timestamp "!!! Error communicating with #{t[:thermometer].name}"
 					end
 				end
-				sleep 10
+				sleep 60
 			end
 		end
 	end
