@@ -1,4 +1,4 @@
-class Logger
+class ThermoMonitor
 
 	attr_reader :thermometers
 

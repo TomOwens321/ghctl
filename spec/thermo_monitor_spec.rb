@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'logger'
+require 'thermo_monitor'
 
-describe Logger do
+describe ThermoMonitor do
 
 	before :each do
-		@logger = Logger.new
+		@logger = ThermoMonitor.new
 	end
 
 	it "registers devices" do

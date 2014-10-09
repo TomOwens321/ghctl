@@ -1,23 +1,23 @@
 require 'onewire'
 require './lib/thermometer'
-require './lib/logger'
+require './lib/thermo_monitor'
 require './lib/owfuncs'
 
 therms = []
 host   = 'bob'
 
 client = Onewire.client host
-logger = Logger.new
+monitor = ThermoMonitor.new
 thermsFound = OwFuncs.find_thermometers host
 
 thermsFound.each do |id|
 	therm = Thermometer.new client, id
 	therm.name = "Therm-#{id}"
 	therms << therm
-	logger.register therm
+	monitor.register therm
 end
 
-logger.run
+monitor.run
 
 loop do
 	sleep 600
