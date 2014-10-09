@@ -3,7 +3,7 @@ require './lib/thermometer'
 require './lib/logger'
 require './lib/owfuncs'
 
-host = 'towens.com'
+host   = 'towens.com'
 client = Onewire.client host
 logger = Logger.new
 therms = OwFuncs.find_thermometers host
@@ -16,5 +16,7 @@ end
 
 
 logger.run
-sleep 600
+loop do
+	sleep 600
+end
 
