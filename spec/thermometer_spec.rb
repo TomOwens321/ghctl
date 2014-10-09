@@ -3,8 +3,11 @@ require 'thermometer'
 
 describe Thermometer do 
 
+  @path = 'path'
+  @client = 'client'
+
   before( :each ) do
-  	@th = Thermometer.new('client', 'path')
+  	@th = Thermometer.new(@client, @path)
   	@dir = ["entry.one","entry.two"]
   end
 
@@ -16,6 +19,10 @@ describe Thermometer do
   it "knows the temperature" do
   	expect_any_instance_of(Onewire::Scope).to receive(:read).with('temperature').and_return(25)
   	expect(@th.temperature).to eq(25)
+  end
+
+  it "has an ID" do
+    expect(@th.id).to eq(@path)
   end
 
   it "has a name" do

@@ -2,9 +2,10 @@ require 'onewire'
 
 class Thermometer < Onewire::Scope
     
-    attr_accessor :name, :location
+    attr_accessor :name, :location, :id
 
 	def initialize( client, path )
+		@id = path
 		@name = path
 		@location = ""
 		super
