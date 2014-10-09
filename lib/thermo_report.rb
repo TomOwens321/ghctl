@@ -1,0 +1,12 @@
+require './lib/log_parser'
+
+puts "Starting thermo report"
+parser = LogParser.new
+logFiles = parser.get_logs( :today )
+
+logFiles.each do |log|
+	puts "Reading #{log}..."
+	puts "#{File.basename(log)} recorded #{parser.temperature_change_count(log, "1099")} temperature changes"
+	mm = parser.min_max( log )
+	puts "Max = %06.2f | Min = %06.2f" % [ mm[:max] * 9/5 + 32, mm[:min] * 9/5 + 32 ] 
+end
