@@ -4,7 +4,7 @@ require './lib/logger'
 require './lib/owfuncs'
 
 therms = []
-host   = 'localhost'
+host   = 'bob'
 
 client = Onewire.client host
 logger = Logger.new
