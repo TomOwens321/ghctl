@@ -4,7 +4,7 @@ require './lib/thermo_monitor'
 require './lib/owfuncs'
 
 therms = []
-host   = 'bob'
+host   = 'towens.com'
 
 client = Onewire.client host
 monitor = ThermoMonitor.new
