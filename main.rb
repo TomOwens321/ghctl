@@ -1,4 +1,5 @@
 require 'onewire'
+require './lib/config'
 require './lib/thermometer'
 require './lib/thermo_monitor'
 require './lib/owfuncs'
@@ -11,8 +12,10 @@ monitor = ThermoMonitor.new
 thermsFound = OwFuncs.find_thermometers host
 
 thermsFound.each do |id|
+	config = THERMOMETERS.select {|t| t[:id].match(/#{id}/)}[0]
 	therm = Thermometer.new client, id
-	therm.name = "Therm-#{id}"
+	therm.name = config.nil? ? "Therm-#{id}" : config[:name]
+	therm.location = config.nil? ? "Location Unknown" : config[:location]
 	therms << therm
 	monitor.register therm
 end
