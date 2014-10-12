@@ -22,7 +22,7 @@ class LogParser
 		[*fileList].each do |file|
 			list = read_temps_for_device( file, device )
 			list.each do |line|
-				temps.push line.split("|")[2].to_f unless line.empty?
+				temps.push line.split("|")[2].to_f
 			end
 		end
 		minMax = {:min => temps.min, :max => temps.max}
