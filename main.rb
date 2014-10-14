@@ -7,6 +7,7 @@ require './lib/owfuncs'
 therms = []
 host   = 'towens.com'
 
+$SCALE = :fahrenheit
 client = Onewire.client host
 monitor = ThermoMonitor.new
 thermsFound = OwFuncs.find_thermometers host

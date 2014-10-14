@@ -53,5 +53,13 @@ describe Thermometer do
   	expect {@th.lowTempAlarm = lowTemp}.not_to raise_error
   	expect( @th.lowTempAlarm ).to eq( lowTemp )
   end
+
+  it "switches to Fahrenheit" do
+    celsius = 25
+    fahrenheit = 77
+    expect_any_instance_of(Onewire::Scope).to receive(:read).with('temperature').and_return( celsius )
+    @th.scale = :fahrenheit
+    expect( @th.temperature ).to eq( fahrenheit )
+  end
 	
 end
