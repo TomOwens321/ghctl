@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'onewire'
 require './lib/config'
 require './lib/thermometer'

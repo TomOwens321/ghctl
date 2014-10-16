@@ -48,7 +48,7 @@ class ThermoMonitor
 
 	def log_it(thermometer, temperature )
 		message = "TEMPLOG : #{thermometer[:thermometer].name} | %07.3f" % [temperature]
-		puts message
+		#puts message
 		Logger.write_log_file_with_timestamp( message )
 	end
 
