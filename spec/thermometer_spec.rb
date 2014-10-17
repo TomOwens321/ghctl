@@ -17,7 +17,7 @@ describe Thermometer do
   end
 
   it "knows the temperature" do
-  	expect_any_instance_of(Onewire::Scope).to receive(:read).with('temperature').and_return(25)
+  	expect_any_instance_of(Onewire::Scope).to receive(:read).with('fasttemp').and_return(25)
   	expect(@th.temperature).to eq(25)
   end
 
@@ -57,7 +57,7 @@ describe Thermometer do
   it "switches to Fahrenheit" do
     celsius = 25
     fahrenheit = 77
-    expect_any_instance_of(Onewire::Scope).to receive(:read).with('temperature').and_return( celsius )
+    expect_any_instance_of(Onewire::Scope).to receive(:read).with('fasttemp').and_return( celsius )
     @th.scale = :fahrenheit
     expect( @th.temperature ).to eq( fahrenheit )
   end

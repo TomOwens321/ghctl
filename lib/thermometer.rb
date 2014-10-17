@@ -13,7 +13,7 @@ class Thermometer < Onewire::Scope
 	end
 
 	def temperature
-		temp_scale( self.read 'temperature' )
+		temp_scale( self.read 'fasttemp' )
 	end
 
 	def highTempAlarm=( highTempLimit )
