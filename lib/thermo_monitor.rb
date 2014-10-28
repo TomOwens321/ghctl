@@ -26,6 +26,7 @@ class ThermoMonitor
 				@thermometers.each do |t| 
 					begin
 					  temp = t[:thermometer].temperature
+					  next if temp == 32.000
 					  unless t[:lastTemp] == temp
 					    #puts "%-24s : %07.3f : %06.2f" % [t[:thermometer].name,  temp, temp * 9/5 + 32]
 					    log_it(t, temp)
