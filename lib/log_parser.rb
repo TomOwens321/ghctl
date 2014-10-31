@@ -17,6 +17,32 @@ class LogParser
 		count
 	end
 
+	def max_temps( logs, device = :any )
+		dates = []
+		max = min_max( logs, device )[:max]
+		[*logs].each do |log|
+			if device == :any
+		    	dates << File.open( log ) {|f| f.grep(/TEMPLOG.*#{max}/)}
+			else
+				dates << File.open( log ) {|f| f.grep(/TEMPLOG.*#{device}.*#{max}/)}
+			end
+		end
+		dates.flatten.each {|line| line.chomp!}
+	end
+
+	def min_temps( logs, device = :any )
+		dates = []
+		min = min_max( logs, device )[:min]
+		[*logs].each do |log|
+			if device == :any
+		    	dates << File.open( log ) {|f| f.grep(/TEMPLOG.*#{min}/)}
+			else
+				dates << File.open( log ) {|f| f.grep(/TEMPLOG.*#{device}.*#{min}/)}
+			end
+		end
+		dates.flatten.each {|line| line.chomp!}
+	end
+
 	def min_max(fileList, device = :any)
 		temps = []
 		[*fileList].each do |file|
