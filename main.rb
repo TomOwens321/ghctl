@@ -1,16 +1,30 @@
+#!/usr/bin/env ruby
 require 'onewire'
+require './lib/config'
 require './lib/thermometer'
-require './lib/logger'
+require './lib/thermo_monitor'
+require './lib/owfuncs'
 
-client = Onewire.client 'towens.com'
-path = client.dir[0]
+therms = []
+host   = 'towens.com'
 
-therm = Thermometer.new client, path
-therm.name = "South Window"
+$SCALE = :fahrenheit
+client = Onewire.client host
+monitor = ThermoMonitor.new
+thermsFound = OwFuncs.find_thermometers host
 
-logger = Logger.new
-logger.register therm
+thermsFound.each do |id|
+	config = THERMOMETERS.select {|t| t[:id].match(/#{id}/)}[0]
+	therm = Thermometer.new client, id
+	therm.name = config.nil? ? "Therm-#{id}" : config[:name]
+	therm.location = config.nil? ? "Location Unknown" : config[:location]
+	therms << therm
+	monitor.register therm
+end
 
-logger.run
-sleep 60
-logger.stop
+monitor.run
+
+loop do
+	sleep 600
+end
+

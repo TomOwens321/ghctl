@@ -2,16 +2,18 @@ require 'onewire'
 
 class Thermometer < Onewire::Scope
     
-    attr_accessor :name, :location
+    attr_accessor :name, :location, :id, :scale
 
 	def initialize( client, path )
+		@id = path
 		@name = path
 		@location = ""
+		@scale = $SCALE
 		super
 	end
 
 	def temperature
-		self.read 'temperature'
+		temp_scale( self.read 'fasttemp' )
 	end
 
 	def highTempAlarm=( highTempLimit )
@@ -30,6 +32,11 @@ class Thermometer < Onewire::Scope
 
 	def lowTempAlarm
 		self.read( 'templow' )
+	end
+
+	def temp_scale( temperature )
+		return temperature.to_f * 9/5 + 32 if @scale == :fahrenheit
+		return temperature.to_f
 	end
 
 end

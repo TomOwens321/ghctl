@@ -3,8 +3,11 @@ require 'thermometer'
 
 describe Thermometer do 
 
+  @path = 'path'
+  @client = 'client'
+
   before( :each ) do
-  	@th = Thermometer.new('client', 'path')
+  	@th = Thermometer.new(@client, @path)
   	@dir = ["entry.one","entry.two"]
   end
 
@@ -14,8 +17,12 @@ describe Thermometer do
   end
 
   it "knows the temperature" do
-  	expect_any_instance_of(Onewire::Scope).to receive(:read).with('temperature').and_return(25)
+  	expect_any_instance_of(Onewire::Scope).to receive(:read).with('fasttemp').and_return(25)
   	expect(@th.temperature).to eq(25)
+  end
+
+  it "has an ID" do
+    expect(@th.id).to eq(@path)
   end
 
   it "has a name" do
@@ -45,6 +52,14 @@ describe Thermometer do
   	expect_any_instance_of(Onewire::Scope).to receive(:read).with('templow').and_return(lowTemp)
   	expect {@th.lowTempAlarm = lowTemp}.not_to raise_error
   	expect( @th.lowTempAlarm ).to eq( lowTemp )
+  end
+
+  it "switches to Fahrenheit" do
+    celsius = 25
+    fahrenheit = 77
+    expect_any_instance_of(Onewire::Scope).to receive(:read).with('fasttemp').and_return( celsius )
+    @th.scale = :fahrenheit
+    expect( @th.temperature ).to eq( fahrenheit )
   end
 	
 end
