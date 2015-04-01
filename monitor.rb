@@ -6,7 +6,7 @@ require './lib/thermo_monitor'
 require './lib/owfuncs'
 
 therms = []
-host   = 'localhost'
+host   = 'ghpi'
 
 $SCALE = :fahrenheit
 client = Onewire.client host
