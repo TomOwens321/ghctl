@@ -26,7 +26,7 @@ class ThermoMonitor
 				@thermometers.each do |t| 
 					begin
 					  temp = t[:thermometer].temperature
-					  unless t[:lastTemp] == temp || Time.now.strftime("%M") == "00"
+					  unless t[:lastTemp] == temp || Time.now.strftime("%M") == "50"
 					    #puts "%-24s : %07.3f : %06.2f" % [t[:thermometer].name,  temp, temp * 9/5 + 32]
 					    log_it(t, temp)
 					    t[:lastTemp] = temp
