@@ -1,8 +1,12 @@
+$:.unshift File.dirname(__FILE__), 'lib', 'lib/devices'
+
 require 'onewire'
+require 'device'
 
 class Thermometer < Onewire::Scope
     
     attr_accessor :name, :location, :id, :scale
+    attr_reader :requests
 
 	def initialize( client, path )
 		@id = path
