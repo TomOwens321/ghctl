@@ -1,8 +1,12 @@
-require 'socket'
+$:.unshift File.dirname(__FILE__), '.', 'lib'
 
-def send_msg( msg, client )
-  puts "Sending #{msg} to #{client}"
-  client.puts msg
+require 'socket'
+require 'command_parser'
+
+def parse_msg( msg, client )
+  response = CommandParser.parse msg
+  client.puts response
+  puts response
 end
 
 server = TCPServer.new 3030
@@ -12,10 +16,11 @@ loop do
     loop do
       # do something
       if IO.select [client]
-        msg = client.gets.chomp
+        sleep 0.1
+        msg = client.read_nonblock(1024)
         puts "#{msg} from #{client.inspect}"
       end
-      send_msg( msg, client )
+      parse_msg( msg, client )
     end
   end
 end
