@@ -12,11 +12,12 @@ class SerialComm
   end
   
   def read_chars
-    if IO.select([@comm],nil,nil,5)
+    msg = ""
+    while IO.select([@comm],nil,nil,1)
       sleep(1)
-      msg = @comm.gets.chomp
+      msg += @comm.gets
     end
-    p msg
+    msg
   end
   
   def write_chars( msg )

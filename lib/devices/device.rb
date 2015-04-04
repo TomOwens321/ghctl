@@ -8,9 +8,4 @@ class Device < DeviceFactory
   def initialize
     @status = [:present]
   end
-
-  def self.by_index( index )
-    @@allDevices[index]
-  end
-
 end
