@@ -9,4 +9,8 @@ class Device < DeviceFactory
     @status = [:present]
   end
 
+  def self.by_index( index )
+    @@allDevices[index]
+  end
+
 end

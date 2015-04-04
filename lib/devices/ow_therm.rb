@@ -1,14 +1,24 @@
+#!/usr/bin/env ruby
 $:.unshift File.dirname(__FILE__), 'lib', 'lib/devices'
 
-require 'device'
+require 'onewire'
+require 'config'
 require 'thermometer'
+require 'device'
+require 'owfuncs'
 
-class OwTherm < Device
+therms = []
+host   = 'ghpi'
 
-  def initialize
-    @therm = Thermometer.new(nil,nil)
-    @requests = []
-  end
+$SCALE = :fahrenheit
+client = Onewire.client host
+thermsFound = OwFuncs.find_thermometers host
 
-  register_device :owTherm
+thermsFound.each do |id|
+  config = THERMOMETERS.select {|t| t[:id].match(/#{id}/)}[0]
+  therm = Thermometer.new client, id
+  therm.name = config.nil? ? "Therm-#{id}" : config[:name]
+  therm.location = config.nil? ? "Location Unknown" : config[:location]
+  therms << therm
+  Device.register_device therm
 end
