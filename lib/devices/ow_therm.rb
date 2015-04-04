@@ -8,7 +8,7 @@ require 'device'
 require 'owfuncs'
 
 therms = []
-host   = 'ghpi'
+host   = 'localhost'
 
 $SCALE = :fahrenheit
 client = Onewire.client host
