@@ -6,7 +6,7 @@ class DeviceFactory
 
   def self.register_device deviceType
     @@allDevices.push deviceType
-    #puts "Created a #{deviceType.class}"
+    puts "Created a #{deviceType.class}"
     #@@capabilities[deviceType] = @@allDevices[deviceType].requests
   end
 

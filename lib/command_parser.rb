@@ -15,9 +15,9 @@ module CommandParser
   end
 
   def CommandParser.do_command( command )
-    puts "do_commanding #{command}"
+    #puts "do_commanding #{command}"
     #cmd = eval( command )
-    p command.class
+    #p command.class
     case command.to_s.downcase
     when "hello"
       return "Hello to you too"
