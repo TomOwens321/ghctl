@@ -15,7 +15,7 @@ def set_ref(table,value)
   parm = "#{table} #{value}"
 end
 
-conn = TCPSocket.new 'tidbit', 3030
+conn = TCPSocket.new 'localhost', 3030
 duinoStat = {device: 'My Arduino', cmd: :status}
 thermo = {device: 1, cmd: :temperature}
 newRef = {device: 'My Arduino', cmd: :set_reference, params: set_ref(0,180)}

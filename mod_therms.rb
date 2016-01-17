@@ -47,5 +47,11 @@ module GetTherms
     logs = parser.get_logs(:this_month)
     parser.min_max( logs, therm.name )
   end
+    
+  def self.all_record( therm )
+    parser = LogParser.new
+    logs = parser.get_logs(:all)
+    parser.min_max( logs, therm.name )
+  end
 
 end
