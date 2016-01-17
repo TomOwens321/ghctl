@@ -13,7 +13,11 @@ class Thermometer < Onewire::Scope
 		@name = path
 		@location = ""
 		@scale = $SCALE
-		super
+		begin
+		  super
+		rescue
+			puts "Unable to talk to owHost"
+		end
 	end
 
 	def temperature
