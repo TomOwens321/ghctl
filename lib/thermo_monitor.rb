@@ -37,9 +37,12 @@ class ThermoMonitor
 					  Logger.write_log_file_with_timestamp "!!! Error communicating with #{t[:thermometer].name}"
 					end
 				end
-				sleep 60
+				sleep 10
 			end
 		end
+		@running.join
+		puts "Thread died. Restarting Thread."
+		self.run
 	end
 
 	def stop
