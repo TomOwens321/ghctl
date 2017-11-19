@@ -8,7 +8,7 @@ module GetTherms
 
   def self.get_therms
     therms = []
-    host   = 'ghpi'
+    host   = 'greenhousepi'
 
     $SCALE = :fahrenheit
     client = Onewire.client host

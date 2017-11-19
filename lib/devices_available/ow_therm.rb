@@ -1,0 +1,1 @@
+../devices/ow_therm.rb
